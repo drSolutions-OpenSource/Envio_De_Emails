@@ -2,6 +2,7 @@ package br.com.drsolutions.enviaremail.ui;
 
 import br.com.drsolutions.enviaremail.envio.EnviarEmail;
 import br.com.drsolutions.enviaremail.util.CarregarImagem;
+import br.com.drsolutions.enviaremail.util.ValidarEmail;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -195,14 +196,14 @@ public class TelaPrincipal extends JDialog {
         painel.add(btnEnviar, gridBagConstraints);
 
         /*
-         * Ação do botão 'Enviar e-mail'
+         * Ação do botão 'Enviar o e-mail'
          * - Valida se existe um destinatário, se o assunto está preenchido e se a mensagem está preenchida
          * - Enviar o e-mail
          * - Avisa ao usuário que o e-mail foi enviado
          * - Limpa os campos da tela
          */
         btnEnviar.addActionListener(e -> {
-            if (validarCampos()) {
+            if (validarCampos() && validarEmails()) {
                 bloquearCampos(true);
                 EnviarEmail enviarEmail = new EnviarEmail();
                 enviarEmail.conectarSMTP();
@@ -255,6 +256,37 @@ public class TelaPrincipal extends JDialog {
             janelaMensagem.mensagemAviso(this, "O campo 'Mensagem' precisa ser preenchido",
                     "Campo obrigatório");
             return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validar se os e-mails informados em Para, Cópia e Cópia Oculta são válidos, como xxx@xxx.xx
+     *
+     * @return boolean sendo true caso o formato dos e-mails seja válido, false caso contrário
+     */
+    private boolean validarEmails() {
+        ValidarEmail validarEmail = new ValidarEmail();
+        if (!para.getText().isEmpty()) {
+            if (!validarEmail.validar(para.getText())) {
+                janelaMensagem.mensagemErro(this, "O e-mail fornecido no campo 'Para' não " +
+                        "é válido!", "Formato de e-mail inválido");
+                return false;
+            }
+        }
+        if (!paraCc.getText().isEmpty()) {
+            if (!validarEmail.validar(paraCc.getText())) {
+                janelaMensagem.mensagemErro(this, "O e-mail fornecido no campo 'Cópia' " +
+                        "não é válido!", "Formato de e-mail inválido");
+                return false;
+            }
+        }
+        if (!paraCco.getText().isEmpty()) {
+            if (!validarEmail.validar(paraCco.getText())) {
+                janelaMensagem.mensagemErro(this, "O e-mail fornecido no campo 'Cópia " +
+                        "Oculta' não é válido!", "Formato de e-mail inválido");
+                return false;
+            }
         }
         return true;
     }

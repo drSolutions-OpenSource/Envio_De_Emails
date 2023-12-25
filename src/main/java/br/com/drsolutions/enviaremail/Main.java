@@ -8,13 +8,14 @@ import static br.com.drsolutions.enviaremail.configuracoes.Configuracoes.*;
 
 /**
  * Envio de e-mails utilizando a API Java Mail com os servidores do Gmail
+ * Realize as configurações na classe 'Configuracoes'
  * .
  * Exemplo de envio com anexos:
  * http://blog.thedevconf.com/2011/04/javamail-enviando-mensagem-html-com.html
  *
  * @author Diego Mendes Rodrigues
- * @version 1.0
- * @since 24/12/2023
+ * @version 1.1
+ * @since 12/25/2023
  */
 public class Main {
     public static void main(String[] args) {

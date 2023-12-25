@@ -113,6 +113,21 @@ public class EnviarEmail {
             /* Arquivo anexado */
             if (!caminhoDoAnexo.isEmpty()) {
                 File file = new File(caminhoDoAnexo);
+
+                /* Verificar se o arquivo do anexo existe e pode ser lido */
+                if (!file.exists() || !file.isFile()) {
+                    this.mensagemDeErro = "O arquivo selecionado para ser anexado não existe, ou não pode " +
+                            "ser acessado.";
+                    return false;
+                }
+
+                /* Verificar se o tamanho em MB do anexo é maior do que o permitido */
+                if (((double) file.length() / (1024 * 1024)) > Configuracoes.TAMANHOMAXIMOANEXOMB) {
+                    this.mensagemDeErro = "O arquivo selecionado para ser anexado possui o tamanho superior a " +
+                            Configuracoes.TAMANHOMAXIMOANEXOMB + " MB, não podendo ser anexado.";
+                    return false;
+                }
+
                 MimeBodyPart anexo = new MimeBodyPart();
                 anexo.setDataHandler(new DataHandler(new FileDataSource(file)));
                 anexo.setFileName(file.getName());

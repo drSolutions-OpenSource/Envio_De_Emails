@@ -5,7 +5,10 @@ o servidor SMTP do Gmail</i></p>
 ## Sobre esse Projeto
 
 Foi criado um programa utiliza a biblioteca Java Mail (javax.mail), junto com a tela desenvolvida com a biblioteca 
-Java Swing, para enviar e-mails, com ou sem anexos, de acordo com a necessidade do usuário final.
+Java Swing, para enviar e-mails, com ou sem anexos, de acordo com a necessidade do usuário final.<br/><br/>
+O envio foi testado com os servidores do Gmail, sendo que para realizar a autenticação com o SMTP do Gmail,
+será necessária a emissão de um Token, ao invés de utilizar a senha regular desse serviço. 
+As informações para a geração desse Token estão em: https://developers.google.com/identity/protocols/oauth2?hl=pt-br
 
 ## Tecnologias Utilizadas
 
@@ -56,6 +59,7 @@ Qualquer desenvolvedor pode contribuir, sendo muito bem-vindo! Caso queira contr
     <a href="https://openjdk.org/">OpenJDK</a><br/>
     <a href="https://www.lncc.br/~rogerio/poo/04a%20-%20Programacao_GUI.pdf">Interfaces Gráficas (GUIs) em Java usando Swing</a><br/>
     <a href="http://www.java2s.com/Tutorials/Java/Java_Swing/index.htm">Java Swing Tutorial</a><br/>
+    <a href="https://developers.google.com/identity/protocols/oauth2?hl=pt-br">Gerar o Token do Gmail</a><br/>
     <a href="https://www.jdevtreinamento.com.br/">JDev Treinamento</a>
 </p>
 
